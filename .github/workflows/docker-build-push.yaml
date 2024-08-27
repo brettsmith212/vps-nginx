@@ -45,5 +45,5 @@ jobs:
             docker pull ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
             docker stop vps-nginx || true
             docker rm vps-nginx || true
-            docker run -d -p 80:80 -v /root/nginx.conf:/etc/nginx/nginx.conf:ro --name vps-nginx --restart always ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+            docker run -d --network bridge -p 80:80 -v /root/nginx.conf:/etc/nginx/nginx.conf:ro --name vps-nginx --restart always ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
           '
